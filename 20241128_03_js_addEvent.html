@@ -15,50 +15,31 @@
         .bg-blue {
             background-color: lightblue;
         }
-
-        .bg-pink {
-            background-color: lightpink;
-        }
-
-        .bg-green {
-            background-color: lightgreen;
-        }
     </style>
 </head>
 
 <body>
 
-    <div id="box" class="bg-blue" onclick="boxFun()">
-
+    <div id="box" class="bg-blue">
 
 
     </div>
 
     <script>
-        // 滑鼠按到box的動作
-        // 1. div onclick =>js function
-        function boxFun() {
-            console.log('hello box');
-            box.setAttribute('class', 'bg-pink');
+        // function
+        // 1.綁定
+        // 2.事件
 
 
-        }
+        //1.綁定 bind
+        // let 冷氣  = document.getElementByID('冷氣');
         let box = document.getElementById('box');
-        // css
-        // box.style.backgroundColor = "lightpink";
 
-        // class
-        // box.classList.remove("bg-blue");
-        // box.classList.add("bg-pink");
+        //2.事件 action
+        box.addEventListener('click', function () {
+            console.log('box click ok');
 
-        // attr
-        // box.setAttribute("class", "bg-pink");
-        // box.setAttribute("class", "bg-green");
-
-        // console.log('box', box);
-
-        // event
-
+        })
 
     </script>
 
