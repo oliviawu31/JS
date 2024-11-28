@@ -15,6 +15,14 @@
         .bg-blue {
             background-color: lightblue;
         }
+
+        .bg-pink {
+            background-color: lightpink;
+        }
+
+        .bg-green {
+            background-color: lightgreen;
+        }
     </style>
 </head>
 
@@ -34,12 +42,31 @@
         //1.綁定 bind
         // let 冷氣  = document.getElementByID('冷氣');
         let box = document.getElementById('box');
+        let count = 0;
 
         //2.事件 action
         box.addEventListener('click', function () {
             console.log('box click ok');
+            box.setAttribute('class', 'bg-pink');
+            // 計算點擊次數
+            count++;
+            console.log(`now ${count}`);
 
         })
+
+        //滑鼠滑過去變色 
+        box.addEventListener('mouseenter', function () {
+            console.log('box mouseenter ok');
+            box.setAttribute('class', 'bg-green');
+        })
+
+
+        box.addEventListener('mouseleave', function () {
+            console.log('box mouseleave ok');
+            box.setAttribute('class', 'bg-blue');
+        })
+
+
 
     </script>
 
