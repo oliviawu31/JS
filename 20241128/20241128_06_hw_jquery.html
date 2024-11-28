@@ -47,7 +47,6 @@
             margin-top: 50px;
             margin-left: 50px;
             border-radius: 30px;
-            transition: transform 0.2s ease;
         }
 
         .button1 {
@@ -81,7 +80,6 @@
             margin-top: 50px;
             margin-left: 50px;
             border-radius: 30px;
-            transition: transform 0.2s ease;
         }
 
         .button2 {
@@ -115,7 +113,6 @@
             margin-top: 50px;
             margin-left: 50px;
             border-radius: 30px;
-            transition: transform 0.2s ease;
         }
 
         .button3 {
@@ -154,6 +151,7 @@
                 click！
             </div>
         </div>
+        <!-- 第一個物品 -->
         <div class="item2">
             <div class="pic2" id="pic2">
                 <img src="./pic/02.jpg" width="300px" height="300px" alt="">
@@ -162,6 +160,7 @@
                 click！
             </div>
         </div>
+        <!-- 第三個物品 -->
         <div class="item3">
             <div class="pic3" id="pic3">
                 <img src="./pic/03.jpg" width="300px" height="300px" alt="">
@@ -173,62 +172,51 @@
 
     </div>
 
-    <footer>
-
-
-    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script>
-        // 1.綁定
-        let button1 = document.getElementById('button1')
-        let button2 = document.getElementById('button2')
-        let button3 = document.getElementById('button3')
-        let pic1 = document.getElementById('pic1')
-        let pic2 = document.getElementById('pic2')
-        let pic3 = document.getElementById('pic3')
+        $(document).ready(function () {
+            console.log('button1', button1);
+            console.log('button2', button2);
+            console.log('button2', button2);
 
-        // 2.事件
-        button1.addEventListener('click', function () {
-            // 更改按鈕文字
-            if (button1.textContent === "Snowboarding") {
-                button1.textContent = "$2500";
-            } else {
-                button1.textContent = "Snowboarding";
-            }
+            // 1.bind
+            // 第一個按鈕
+            $('#button1').on('click', function () {
+
+                // 2.action
+                if ($(this).text() === "Snowboarding") {
+                    $(this).text("$2500");
+                } else {
+                    $(this).text("Snowboarding");
+                }
+            });
+            // 第二個按鈕
+            $('#button2').on('click', function () {
+
+                // 2.action
+                if ($(this).text() === "Camping") {
+                    $(this).text("$3000");
+                } else {
+                    $(this).text("Camping");
+                }
+            });
+            // 第三個按鈕
+            $('#button3').on('click', function () {
+
+                // 2.action
+                if ($(this).text() === "Space adventure") {
+                    $(this).text("$100,000");
+                } else {
+                    $(this).text("Space adventure");
+                }
+            });
+
         });
 
-        button2.addEventListener('click', function () {
-            // 更改按鈕文字
-            if (button2.textContent === "Camping") {
-                button2.textContent = "$3000";
-            } else {
-                button2.textContent = "Camping";
-            }
-        });
-
-        button3.addEventListener('click', function () {
-            // 更改按鈕文字
-            if (button3.textContent === "Space adventure") {
-                button3.textContent = "$100,000";
-            } else {
-                button3.textContent = "Space adventure";
-            }
-        });
-
-        // 圖片點擊放大效果
-        pic1.addEventListener('click', function () {
-            pic1.style.transform = pic1.style.transform === 'scale(1.1)' ? 'scale(1)' : 'scale(1.1)';
-        });
-
-        pic2.addEventListener('click', function () {
-            pic2.style.transform = pic2.style.transform === 'scale(1.1)' ? 'scale(1)' : 'scale(1.1)';
-        });
-
-        pic3.addEventListener('click', function () {
-            pic3.style.transform = pic3.style.transform === 'scale(1.1)' ? 'scale(1)' : 'scale(1.1)';
-        });
     </script>
-
 
 </body>
 
