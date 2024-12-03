@@ -15,6 +15,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script>
+        // 4.自定義 function => toUrl()
         function toUrl($data) {
             window.location.href = $data;
         }
@@ -35,18 +36,21 @@
 
                 // js轉址
 
-                // 1. href
-                // window.location.href = "https://www.w3schools.com/";
+                // 1. href ***
+                window.location.href = "https://www.w3schools.com/";
 
                 // 2.replace() 不能返回上一頁
                 // *()表示 method 
                 // window.location.replace("https://www.w3schools.com/");
 
-                // 3.自定義PHP function => toUrl
-                let url = "https://www.w3schools.com/";
-                toUrl(url);
 
+                // 3.assign()
+                // window.location.assign("https://www.w3schools.com/");
 
+                // 4.自定義 function => toUrl()
+
+                // 5.php轉址
+                // header("Location: admissions.php?success");
 
 
             });
