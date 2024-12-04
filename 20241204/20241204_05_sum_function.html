@@ -72,6 +72,36 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         $(document).ready(function () {
+
+            /*
+            * sumFun 加總
+            * num1 number 第一個數字
+            * num2 number 第二個數字
+            * return sum 加總
+            */
+            function sumFun(num1, num2) {
+                let sum = num1 + num2;
+                console.log('sum', sum);
+                return sum;
+            }
+
+            /*
+            * 10*Fun 10倍
+            * sum 加總
+            * return sum*10 10倍加總
+            */
+            function x10Fun(sum) {
+                return sum * 10;
+            }
+
+
+
+            function showResult(num1Value, num2Value, sum, x10Result) {
+                box1Span.text(`${num1Value} + ${num2Value} = ${sum}`);
+                box2Span.text(`${num1Value} + ${num2Value} = ${sum}`);
+                box3Span.text(`${sum} x 10 = ${x10Result}`);
+            }
+
             // 1. bind
             const num1 = $('#num1');
             const num2 = $('#num2');
@@ -98,19 +128,15 @@
                 console.log('num2Value', num2Value);
                 console.log('num2Value typeof', typeof (num2Value));
 
-                // 3.sum = num1 + num2
-                let sum = num1Value + num2Value;
-                console.log('sum', sum);
+                // 3.sumFun()
+                let sum = sumFun(num1Value, num2Value);
 
-                // 4.show result box1Span
-                box1Span.text(`${num1Value} + ${num2Value} = ${sum}`);
+                // 4.x10Fun()
+                let x10Result = x10Fun(sum);
 
-                // 5.show result box2Span
-                box2Span.text(`${num1Value} + ${num2Value} = ${sum}`);
+                // 5.show result
+                showResult(num1Value, num2Value, sum, x10Result);
 
-                // 6.show result box3Span
-                let x10Result = sum * 10;
-                box3Span.text(`${sum} x 10 = ${x10Result}`);
 
 
 
@@ -120,11 +146,7 @@
 
 
         });
-
     </script>
-
-
-
 </body>
 
 </html>
