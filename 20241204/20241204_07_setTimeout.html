@@ -74,9 +74,25 @@
             const box1Span = $('#box1Span');
             const box2Span = $('#box2Span');
 
+            // timer
+            let myInterval;
+            let count = 0;
+
+            // for 1 -> 10  sec:1
+            let timer = setInterval(function () {
+                count++;
+                console.log(count);
+                if (count >= 10) {
+                    clearInterval(timer);
+                }
+            }, 1000)
+
             //2. action
             myBtn.click(function () {
-                console.log('myBtn ok');
+
+                clearInterval(myInterval);
+                console.log('myBtn ok ');
+
                 let getTextValue = myText.val();
                 let getTimeValue = Number(waitTime.val()) * 1000;
                 console.log('getTextValue', (getTextValue));
@@ -94,16 +110,27 @@
 
 
                 // 無限
-                setInterval(function () {
-                    console.log(`my text is ${getTextValue}`);
-                    box1Span.text(getTextValue);
-                    box2Span.text(getTextValue);
+                // setInterval(function () {
+                //     console.log(`my text is ${getTextValue}`);
+                //     box1Span.text(getTextValue);
+                //     box2Span.text(getTextValue);
 
-                    setTimeout(function () {
-                        box1Span.text('');
-                        box2Span.text('');
-                    }, 500);
+                //     setTimeout(function () {
+                //         box1Span.text('');
+                //         box2Span.text('');
+                //     }, 500);
+                // }, getTimeValue);
+
+
+                //有次數限制
+                myInterval = setInterval(function () {
+                    count++;
+                    console.log(`my text is ${getTextValue} - ${count}`);
+                    box1Span.text(getTextValue);
+                    box2Span.text(`${getTextValue} - ${count}`);
+
                 }, getTimeValue);
+
 
 
             });
