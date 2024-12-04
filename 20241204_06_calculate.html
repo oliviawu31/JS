@@ -45,6 +45,10 @@
             </p>
 
             <p>
+                <input type="text" name="" id="opt">
+            </p>
+
+            <p>
                 <button type="button" id="myBtn">myBtn</button>
             </p>
             <p>
@@ -62,7 +66,6 @@
             <p>
                 <span id="box3Span"></span>
             </p>
-
         </div>
     </div>
 
@@ -91,21 +94,22 @@
             * sum 加總
             * return sum*10 10倍加總
             */
+
+
             function x10Fun(sum) {
                 return sum * 10;
             }
 
-
-
-            function showResult(num1Value, num2Value, sum, x10Result) {
-                box1Span.text(`${num1Value} + ${num2Value} = ${sum}`);
-                box2Span.text(`${num1Value} + ${num2Value} = ${sum}`);
+            function showResult(num1Value, num2Value, optValue, sum, x10Result) {
+                box1Span.text(`${num1Value} ${optValue} ${num2Value} = ${sum}`);
+                box2Span.text(`${num1Value} ${optValue} ${num2Value} = ${sum}`);
                 box3Span.text(`${sum} x 10 = ${x10Result}`);
             }
 
             // 1. bind
             const num1 = $('#num1');
             const num2 = $('#num2');
+            const opt = $('#opt');
             const myBtn = $('#myBtn');
             const box1Span = $('#box1Span');
             const box2Span = $('#box2Span');
@@ -117,7 +121,8 @@
 
                 // 1.get num1
                 // 2.get num2
-                // 3.sum = num1 + num2
+                // 3.get opt
+                // 4.sum = num1 opt num2
 
                 // 1.get num1
                 let num1Value = Number(num1.val());
@@ -129,14 +134,40 @@
                 console.log('num2Value', num2Value);
                 console.log('num2Value typeof', typeof (num2Value));
 
-                // 3.sumFun()
-                let sum = sumFun(num1Value, num2Value);
+                // 3.get opt
+                let optValue = opt.val();
+                console.log('optValue', optValue);
+                console.log('optValue typeof', typeof (optValue));
 
-                // 4.x10Fun()
-                let x10Result = x10Fun(sum);
+                // 4. calFun + - * /
 
-                // 5.show result
-                showResult(num1Value, num2Value, sum, x10Result);
+                let calResult = 0;
+                switch (optValue) {
+                    case '+':
+                        calResult = num1Value + num2Value;
+                        break;
+
+                    case '-':
+                        calResult = num1Value - num2Value;
+                        break;
+
+                    case '*':
+                        calResult = num1Value * num2Value;
+                        break;
+
+                    case '/':
+                        calResult = num1Value / num2Value;
+                        break;
+
+                    default:
+                        break;
+                }
+
+                // 5.x10Fun()
+                let x10Result = x10Fun(calResult);
+
+                // 6.show result
+                showResult(num1Value, num2Value, optValue, calResult, x10Result);
 
 
 
