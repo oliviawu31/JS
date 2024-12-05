@@ -1,8 +1,8 @@
 <?php
 $data = [
-    's1' => 'amy',
-    's2' => 'bob',
-    's3' => 'cat',
+    'name' => 'Hi! Everyone',
+    'mobile' => '✿✿✿✿✿',
+    'word' => '❆ Merry Christmas ❆',
 ];
 
 function dd($data)
