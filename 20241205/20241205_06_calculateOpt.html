@@ -9,7 +9,7 @@
 
 <body>
     <h1 id="myH1">計算機</h1>
-    <form action="./getResult.php" method="get" id="myForm">
+    <form action="./20241205_06_getResult.php" method="get" id="myForm">
 
         <p>
             <input type="number" name="num1" id="num1">
@@ -68,7 +68,7 @@
 
                 $.ajax({
                     type: "get",
-                    url: "./getResult.php",
+                    url: "./20241205_06_getResult.php",
                     data: data,
                     dataType: "json",
                     success: function (res) {
