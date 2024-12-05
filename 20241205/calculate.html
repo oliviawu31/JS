@@ -7,42 +7,44 @@
     <title>Document</title>
 </head>
 
-
 <body>
-    Hello html
-    <h1 id="myH1">h1 ok</h1>
-
-    <a href="./20241203_03_ajax.php"></a>
-
-    <button type="button" id="myBtn">myBtn</button>
+    <h1 id="myH1">計算機</h1>
+    <form action="./getSum.php" method="get" id="myForm">
+        <p>
+            <input type="number" name="num1" id="num1">
+        </p>
+        <p>
+            <input type="number" name="num2" id="num2">
+        </p>
+        <p>
+            <input type="submit" value="submit">
+        </p>
+    </form>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
     <script>
-        // jqready
         $(document).ready(function () {
             // 1. bind
             const myH1 = $('#myH1');
-            const myBtn = $('#myBtn');
-            // 2. action
-            myBtn.click(function (e) {
-                let url = './20241203_03_ajax.php';
+            const num1 = $('#num1');
+            const num2 = $('#num2');
+
+            // 2.action
+            myForm.submit(function (e) {
+                e.preventDefault();
+
+                let data = myForm.serializeArray();
 
 
                 $.ajax({
-                    // 測試ajax =>可以先用get =>在PHP顯示沒問題的時候再換成POST
                     type: "get",
-                    url: "./20241203_03_ajax.php",
-                    // data: "data",
+                    url: "./getSum.php",
+                    data: data,
                     dataType: "json",
                     success: function (response) {
                         console.log('response', response);
-                        // console.log('response typeof', typeof (response));
-                        // console.log('response.s1', response.s1);
-
-                        myH1.text(response.s1);
 
                     }
                 });
@@ -50,6 +52,7 @@
             });
 
         });
+
     </script>
 
 </body>

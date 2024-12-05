@@ -75,13 +75,13 @@
             const myBtn = $('#myBtn');
             // 2. action
             myBtn.click(function (e) {
-                let url = './20241203_04_ajax2.php';
+                let url = './20241205_05_getSum.php';
 
 
                 $.ajax({
                     // 測試ajax =>可以先用get =>在PHP顯示沒問題的時候再換成POST
                     type: "get",
-                    url: "./20241203_04_ajax2.php",
+                    url: './20241205_05_getSum.php',
                     // data: "data",
                     dataType: "json",
                     success: function (response) {
