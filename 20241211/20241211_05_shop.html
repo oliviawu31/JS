@@ -18,6 +18,11 @@
             padding: 8px;
             text-align: center;
         }
+
+        .text-red {
+            color: red;
+            font-size: 30px;
+        }
     </style>
 </head>
 
@@ -153,14 +158,25 @@
                 // 大於200元打8折
                 // 其他的原價
 
+                // if (sum >= 200) {
+                //     sum = sum * 0.8;
+                //     let resultString = `${sum}元`;
+                //     sumResult.text(resultString);
+                // } else {
+                //     let resultString = `${sum}元`;
+                //     sumResult.text(resultString);
+                // }
+
+                // 重構
                 if (sum >= 200) {
                     sum = sum * 0.8;
-                    let resultString = `${sum}元`;
-                    sumResult.text(resultString);
+                    sumResult.attr('class', 'text-red');
                 } else {
-                    let resultString = `${sum}元`;
-                    sumResult.text(resultString);
+                    sumResult.attr('class', '');
+                    // sumResult.removeClass('text-red');
                 }
+
+
 
                 let resultString = `${sum} 元`;
                 sumResult.text(resultString);
