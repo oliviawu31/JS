@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dinotaeng's Wonderland</title>
+    <style>
+        h1 {
+            color: lightgoldenrodyellow;
+            text-align: center;
+        }
+
+        body {
+            background-color: #CD853F;
+        }
+
+        .container {
+            background-color: #FDF5E6;
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+
+
+        }
+
+        td,
+        th {
+            border: 1px solid lightgrey;
+            padding: 8px;
+            text-align: center;
+            border-color: rgb(149, 93, 24);
+            color: #8B4726;
+
+        }
+
+        .text-red {
+            color: red;
+            font-size: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Dinotaeng's Wonderland</h1>
+
+    <div class="container">
+
+
+
+        <table>
+            <tr>
+                <!-- <th>id</th> -->
+                <th width="15%">PICTURE</th>
+                <th width="10%">ITEM</th>
+                <th width="30%">DESCRIPTION</th>
+                <th width="10%">PRICE</th>
+                <th width="10%">QUANTITY</th>
+                <th width="10%">TOTAL</th>
+            </tr>
+
+            <!-- 第一組 -->
+            <tr>
+                <!-- 1.圖片 -->
+                <td>
+                    <img src="https://i.pinimg.com/736x/eb/1f/77/eb1f7730a9f0d7d6f428a8d03b57578e.jpg" width="220px"
+                        height="220px" alt="" srcset="">
+                </td>
+                <!-- 2.品項 -->
+                <td>
+                    <p class="priceClass" id="price1" data-price="1000"></p>
+                    <p>
+                        Magic Show
+                    </p>
+                </td>
+                <!-- 3.desc -->
+                <td>
+                    <p>
+                        Prepare to be amazed and mystified by a dazzling performance of illusion and wonder! <br>
+                        Get ready for a night of wonder, mystery, and entertainment that will leave you questioning the
+                        impossible!
+                    </p>
+                </td>
+                <!-- 4.price -->
+                <td>
+                    $1000
+                </td>
+                <!-- 5.quantity -->
+                <td>
+                    <input class="inputClass" type="number" name="" id="input1" value="0" max="10" min="0">
+                </td>
+                <!-- 6.total -->
+                <td>
+                    <p class="totalClass" id="total1">
+                        0
+                    </p>
+                </td>
+            </tr>
+
+            <!-- 第二組 -->
+            <tr>
+                <!-- 1.圖片 -->
+                <td>
+                    <img src="https://i.pinimg.com/736x/e1/ba/5a/e1ba5ad21aecce3a3d0a877bca7e6566.jpg" width="220px"
+                        height="220px" alt="" srcset="">
+                </td>
+                <!-- 2.品項 -->
+                <td>
+                    <p class="priceClass" id="price2" data-price="500"></p>
+                    <p>
+                        Movie Theater
+                    </p>
+                </td>
+                <!-- 3.desc -->
+                <td>
+                    <p>
+                        Enjoy the ultimate cinematic experience at our Movie Theater! With comfortable seating, <br>
+                        the latest films, and top-quality sound and visuals, we bring movies to life.<br>
+                        Grab your tickets and prepare for an unforgettable movie night!
+                    </p>
+                </td>
+                <!-- 4.price -->
+                <td>
+                    $500
+                </td>
+                <!-- 5.quantity -->
+                <td>
+                    <input class="inputClass" type="number" name="" id="input2" value="0" max="10" min="0">
+                </td>
+                <!-- 6.total -->
+                <td>
+                    <p class="totalClass" id="total2">
+                        0
+                    </p>
+                </td>
+            </tr>
+            <!-- 第三組 -->
+            <tr>
+                <!-- 1.圖片 -->
+                <td>
+                    <img src="https://i.pinimg.com/736x/12/11/5e/12115e5d20669cebed0a8a520eef9534.jpg" width="220px"
+                        height="220px" alt="" srcset="">
+                </td>
+                <!-- 2.品項 -->
+                <td>
+                    <p class="priceClass" id="price3" data-price="800"></p>
+                    <p>
+                        Art Gallery
+                    </p>
+                </td>
+                <!-- 3.desc -->
+                <td>
+                    <p>
+                        Step into a world of creativity and expression at our Art Gallery,<br>
+                        where captivating masterpieces from both emerging and established artists are on display. <br>
+                        Don't miss out on the opportunity to experience the beauty and talent showcased in our curated
+                        collections!
+                    </p>
+                </td>
+                <!-- 4.price -->
+                <td>
+                    $800
+                </td>
+                <!-- 5.quantity -->
+                <td>
+                    <input class="inputClass" type="number" name="" id="input3" value="0" max="10" min="0">
+                </td>
+                <!-- 6.total -->
+                <td>
+                    <p class="totalClass" id="total3">
+                        0
+                    </p>
+                </td>
+            </tr>
+            <!-- subtotal -->
+            <tr>
+                <td colspan="5">
+                    Total
+                </td>
+                <td>
+                    <p id="sumResult">
+                        $0
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <hr>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $(document).ready(function () {
+            // function
+            // get all Result => sum
+            function getSum() {
+
+                let sum = 0;
+                totalClass.each(function (index, element) {
+                    console.log('index', index);
+                    console.log('element', element);
+                    console.log('this', this);
+
+                    let getTotalValue = Number($(this).text());
+                    sum = sum + getTotalValue;
+
+                });
+
+                // 重構
+                if (sum >= 1500) {
+                    sum = sum * 0.8;
+                    sumResult.attr('class', 'text-red');
+                } else {
+                    sumResult.attr('class', '');
+                    // sumResult.removeClass('text-red');
+                }
+
+                let resultString = `${sum} 元`;
+                sumResult.text(resultString);
+
+            }
+
+            // 1.bind
+            const price1 = $('#price1');
+            const input1 = $('#input1');
+            const total1 = $('#total1');
+
+            const priceClass = $('.priceClass');
+            const inputClass = $('.inputClass');
+            const totalClass = $('.totalClass');
+
+            console.log('priceClass', priceClass);
+            console.log('inputClass', inputClass);
+            console.log('totalClass', totalClass);
+
+
+
+            const sumResult = $('#sumResult');
+            let sum = 0;
+
+
+            // 2.action
+            $.each(inputClass, function (indexInArray, valueOfElement) {
+                $(this).change(function (e) {
+                    console.log('chaneg ok');
+
+                    // now ?
+                    console.log('now $(this)', $(this));
+
+                    // parent() tr
+                    myParent = $(this).parent().parent();
+                    console.log('myParent', myParent);
+
+                    // find() .class
+                    myPrice = myParent.find('.priceClass').attr('data-price');
+                    console.log('myPrice', myPrice);
+
+                    myTotal = myParent.find('.totalClass');
+
+
+                    let getPriceValue = Number(myPrice);
+                    let getInputValue = Number($(this).val());
+                    let result = getPriceValue * getInputValue;
+                    console.log(getPriceValue);
+                    console.log(getInputValue);
+                    console.log(result);
+                    myTotal.text(result);
+
+                    getSum();
+                });
+
+
+            });
+        });
+    </script>
+</body>
+
+</html>
