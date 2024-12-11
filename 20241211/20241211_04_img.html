@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #box {
+      width: 100%px;
+      height: 80vh;
+      /* background-color: lightpink; */
+      margin-top: 30px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <button id="hide">Hide</button>
+  <button id="show">Show</button>
+  <button id="toggle">Toggle</button>
+  <div id="box">
+    <img src="https://i.pinimg.com/736x/9d/8d/49/9d8d495f49c510cfc4d0eb9078c73568.jpg" alt="">
+  </div>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script>
+    $(document).ready(function () {
+      // 1. bind
+      const hide = $('#hide');
+      const show = $('#show');
+      const toggle = $('#toggle');
+      const box = $('#box');
+      box.hide();
+      box.fadeIn(10000);
+
+      //2. action
+      hide.click(function (e) {
+        console.log('hide ok!');
+        box.fadeOut(3000);
+      });
+
+      show.click(function (e) {
+        console.log('show ok!');
+        box.fadeIn(3000);
+      });
+
+      toggle.click(function (e) {
+        console.log('toggle ok!');
+        box.fadeToggle(3000);
+      });
+
+
+    });
+
+  </script>
+
+
+</body>
+
+</html>
