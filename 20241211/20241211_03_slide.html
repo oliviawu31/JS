@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #box {
+      width: 300px;
+      height: 300px;
+      background-color: lightpink;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <button id="hide">slideUp</button>
+  <button id="show">slideDown</button>
+  <button id="toggle">slideToggle</button>
+  <div id="box">
+
+  </div>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script>
+    $(document).ready(function () {
+      // 1. bind
+      const hide = $('#hide');
+      const show = $('#show');
+      const toggle = $('#toggle');
+      const box = $('#box');
+
+
+      //2. action
+      // fadeout( )=>( )裡可以加時間
+      hide.click(function (e) {
+        console.log('hide ok!');
+        box.slideUp();
+      });
+
+      show.click(function (e) {
+        console.log('show ok!');
+        box.slideDown();
+      });
+
+      toggle.click(function (e) {
+        console.log('toggle ok!');
+        box.slideToggle(3000);
+      });
+
+
+    });
+
+  </script>
+
+
+</body>
+
+</html>
