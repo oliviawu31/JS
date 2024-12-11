@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h2>shop</h2>
+
+    <table>
+        <tr>
+            <th>pic</th>
+            <th>desc</th>
+            <th>num</th>
+            <th>total</th>
+        </tr>
+
+        <tr>
+            <td>
+                <img src="https://picsum.photos/id/20/180/160" alt="" srcset="">
+            </td>
+            <td>
+                茶
+                <p id="price1" data-price="200">
+                    200元
+                </p>
+                <P>
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum, eum!
+                </P>
+            </td>
+            <td>
+                <input type="number" name="" id="input1" value="0" max="10" min="0">
+            </td>
+            <td>
+                <p id="total">
+                    0
+                </p>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td>
+                <img src="https://picsum.photos/id/20/180/160" alt="" srcset="">
+            </td>
+            <td>
+                咖啡
+                <p id="price2" data-price="100">
+                    100元
+                </p>
+                <P>
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum, eum!
+                </P>
+            </td>
+            <td>
+                <input type="number" name="" id="input2" value="0" max="10" min="0">
+            </td>
+            <td>
+                <p id="tota2">
+                    0
+                </p>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <img src="https://picsum.photos/id/20/180/160" alt="" srcset="">
+            </td>
+            <td>
+                礦泉水
+                <p id="price3" data-price="50">
+                    50元
+                </p>
+                <P>
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum, eum!
+                </P>
+            </td>
+            <td>
+                <input type="number" name="" id="input3" value="0" max="10" min="0">
+            </td>
+            <td>
+                <p id="tota3">
+                    0
+                </p>
+            </td>
+        </tr>
+
+
+    </table>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            //1. bind
+            const price1 = $('#price1');
+            const input1 = $('#input1');
+            const total1 = $('#total1');
+
+            const price2 = $('#price2');
+            const input2 = $('#input2');
+            const total2 = $('#total2');
+
+            const price3 = $('#price3');
+            const input3 = $('#input3');
+            const total3 = $('#total3');
+
+            //2. action
+            input1.change(function (e) {
+                console.log('change ok');
+                let getPrice1Value = 
+
+            });
+
+
+        });
+
+
+    </script>
+
+</body>
+
+</html>
