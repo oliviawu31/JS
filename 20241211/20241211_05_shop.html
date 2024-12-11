@@ -149,6 +149,19 @@
 
                 let sum = getTotal1Value + getTotal2Value + getTotal3Value;
                 console.log('getSum', sum);
+
+                // 大於200元打8折
+                // 其他的原價
+
+                if (sum >= 200) {
+                    sum = sum * 0.8;
+                    let resultString = `${sum}元`;
+                    sumResult.text(resultString);
+                } else {
+                    let resultString = `${sum}元`;
+                    sumResult.text(resultString);
+                }
+
                 let resultString = `${sum} 元`;
                 sumResult.text(resultString);
 
