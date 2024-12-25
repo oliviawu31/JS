@@ -31,7 +31,7 @@
     </style>
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100"> <!--  body 設為 d-flex flex-column min-vh-100 -->
     <!-- navbar -->
     <div class="container-fluid">
         <div class="row">
@@ -54,7 +54,10 @@
                                 <a class="nav-link " href="./about.html">ABOUT</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " href="#">STORIES</a>
+                                <a class="nav-link " href="./characters.html">CHARACTERS</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="./shop.html">SHOP</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">MY
@@ -73,17 +76,37 @@
         </div>
     </div>
 
-    <!-- 第一排 -->
-    <div class="container-fluid mt-5 ">
-        <div class="row">
-            <div class="col col-6 mt-5">
-                <img src="./imgs/stories/1-1.png" class="rounded mx-auto d-block" alt="">
-                <!-- <p>Sunshine in Marshville</p> -->
+
+
+
+
+
+    <!-- 主要內容區域 -->
+
+    <div class="container-fluid mt-5 " style="height: 70vh;">
+        <div class="row justify-content-center" style=" height: 100%; width: 100%;">
+            <!-- 左空白欄 -->
+            <div class="col-12 col-md-2 mt-5">
 
             </div>
 
-            <div class="col col-6 mt-5">
-                <img src="./imgs/stories/1-2.png" class="rounded mx-auto d-block" alt="e">
+            <!-- 左圖 -->
+            <div class="col-12 col-md-3 mt-5">
+                <figure class="figure">
+                    <img src="./imgs/stories/1-1.png" class="figure-img img-fluid rounded" alt="...">
+                    <figcaption class="figure-caption text-end">Sunshine in Marshville</figcaption>
+                </figure>
+            </div>
+
+            <!-- 右圖 -->
+            <div class="col-12 col-md-3 mt-5">
+                <figure class="figure">
+                    <img src="./imgs/stories/1-2.png" class="figure-img img-fluid rounded" alt="...">
+                    <figcaption class="figure-caption text-end">Snow in Marshville</figcaption>
+                </figure>
+            </div>
+            <!-- 右空白欄 -->
+            <div class="col-12 col-md-2">
 
             </div>
         </div>
@@ -91,8 +114,8 @@
     </div>
 
     <!-- FOOTER -->
-    <hr>
-    <footer>
+    <footer class="mt-auto">
+        <hr>
         <div class="container-fluid bd-footer py-4 mt-3">
             <div class="row justify-content-center">
                 <div class="col-3 mb-3 text-center">

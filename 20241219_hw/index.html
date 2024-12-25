@@ -85,8 +85,7 @@
                                 <a class="nav-link " href="./stories.html">STORIES</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " href="./stories.html">CHARACTERS
-                                </a>
+                                <a class="nav-link " href="./characters.html">CHARACTERS</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">MY
@@ -276,7 +275,7 @@
                 <div class="col-3 mb-3 text-center">
                     <h5>Follow Us</h5>
                     <a href="https://www.instagram.com/dinotaeng/" target="_blank">
-                        <img src="./imgs/" width="30px" height="30px" alt="Instagram">
+                        <img src="./imgs/index/Instagram.png" width="30px" height="30px" alt="Instagram">
                     </a>
                     <a href="https://www.facebook.com/dinotaeng.official/?locale=zh_TW" target="_blank" class="ms-3">
                         <img src="./imgs/index/facebook.png" width="30px" height="30px" alt="Facebook">
@@ -285,6 +284,41 @@
             </div>
         </div>
     </footer>
+
+    <!-- 彈出視窗 -->
+    <!-- Modal HTML -->
+    <div class="modal fade" id="welcomeModal" tabindex="-1" aria-labelledby="welcomeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="welcomeModalLabel">Welcome to DINOTAENG</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    We're glad to have you here! Enjoy browsing our website.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success">
+                        <a href="./shop.html" style="color: white; text-decoration: none;">Go to Shop</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to show the modal when the page loads
+
+        window.addEventListener('load', function () {
+            var myModal = new bootstrap.Modal(document.getElementById('welcomeModal'), {
+                keyboard: false
+            });
+            myModal.show();
+        });
+    </script>
+
+
 
 </body>
 
