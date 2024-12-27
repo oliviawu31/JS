@@ -17,6 +17,8 @@
             background-color: rgb(130, 76, 23);
             height: 40px;
             opacity: 0.8;
+            z-index: 1050;
+            /* 設置更高的層級，保證它在其他元素之上 */
         }
 
         .nav-link {
@@ -54,19 +56,6 @@
         hr {
             color: rgb(130, 76, 23);
             font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-        }
-
-        .fixed-icon {
-            position: fixed;
-            top: 60px;
-            /* 讓圖標位於 navbar 下方 */
-            left: 20px;
-            /* 設定圖示距離左側的間距 */
-            z-index: 1040;
-            /* 確保圖示不會被 navbar 遮擋 */
-            width: 50px;
-            /* 設定圖示大小 */
-            height: 50px;
         }
     </style>
 </head>
@@ -116,31 +105,20 @@
             </nav>
 
         </div>
-    </div>
-
-    <!-- 固定圖標 -->
-
-    <div class="container ">
-
-
-        <div class="row">
-
-            <div class="col-6 mt-5 z-index-5">
-
+        <div class="row justify-content-center fixed-top">
+            <div class="col-5 mt-5">
             </div>
-            <div class="col">
-                <a href="/" class="fixed-icon">
+            <div class="col-6 mt-5">
+                <a href="./index.html" class="fixed-icon ">
                     <img src="./imgs/index/marshmallow.png" alt="">
                 </a>
-
             </div>
-            <div class="col">
-
-            </div>
-
         </div>
-
     </div>
+
+    <!-- 固定棉花糖圖標 -->
+    <!-- <div class="container-fluid">
+    </div> -->
 
 
 
@@ -297,7 +275,7 @@
             <div class="row justify-content-center">
                 <div class="col-3 mb-3 text-center">
                     <a href="https://www.dinotaeng.com/"
-                        class="d-inline-flex align-items-center mb-2 link-dark text-decoration-none">
+                        class="d-inline-flex align-items-center mb-2  text-decoration-none">
                         <img src="./imgs/index/logo2.jpg" width="40px" height="40px" alt="bobo">
                         <span class="fs-5 ms-3 ">DINOTAENG</span>
                     </a>
@@ -307,7 +285,7 @@
                 </div>
                 <div class="col-3 mb-3 text-center">
                     <h5>Reference</h5>
-                    <ul class="list-unstyled">
+                    <ul class="list-unstyled small ">
                         <li><a href="https://dinotaeng.com/">Official Website</a></li>
                     </ul>
                 </div>
