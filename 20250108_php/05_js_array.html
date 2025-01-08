@@ -12,6 +12,7 @@
     <script>
         let myArr = [1, 2, 3, 4, 5];
         let newArr = [];
+        let sum = 0; //加總的
         console.log('myArr', myArr);
 
         // 1.原生的js
@@ -19,27 +20,41 @@
         // js method
 
 
-        // js foreach計算array*2
+        // (1)js 原生foreach計算array*2
         myArr.forEach(function (value) {
             console.log('value', value);
             let tmp = value * 2;
             newArr.push(tmp);
         });
 
-        // js method /map =>計算array*2
+        // (2)js 原生foreach計算加總
+        myArr.forEach(function (value) {
+            sum += value;
+        });
+
+
+
+        // (1) js method /map =>計算array*2
         let mapArr = myArr.map(function (value) {
             return value * 2;
         });
 
-        // // js method / filter
+        // (2) js method / filter =>大於3
         let fillterArr = myArr.filter(function (value) {
             return value > 3;
         });
+
+        // (3) 
+        let sumReduce = myArr.reduce(function (total, value) {
+            return total + value;
+        },);
 
 
         console.log('newArr', newArr);
         console.log('mapArr', mapArr);
         console.log('fillterArr', fillterArr);
+        console.log('sum', sum);
+        console.log('sumReduce', sumReduce);
 
 
 
