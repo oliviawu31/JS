@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>計算示範</title>
+</head>
+
+<body>
+
+    <!-- 輸入框 -->
+    <label for="originMoney">初始金額:</label>
+    <input type="number" id="originMoney" value="10">
+
+    <label for="rate">增長率:</label>
+    <input type="number" id="rate" value="1.08" step="0.01">
+
+    <!-- 提交按鈕 -->
+    <button id="calculateButton">計算</button>
+
+    <script>
+        // 確保文檔載入完畢後綁定事件
+        document.addEventListener("DOMContentLoaded", function () {
+            // 取得計算按鈕
+            const calculateButton = document.getElementById("calculateButton");
+
+            // 監聽按鈕點擊事件
+            calculateButton.addEventListener("click", function () {
+                // 獲取來自 input 的值
+                let originMoney = parseFloat(document.getElementById("originMoney").value);
+                let rate = parseFloat(document.getElementById("rate").value);
+
+                // 檢查用戶輸入的數值
+                if (isNaN(originMoney) || isNaN(rate)) {
+                    alert("請確保初始金額和增長率都是有效的數字！");
+                    return;
+                }
+
+                // 輸入值更新後，進行計算
+                let sum = originMoney;
+                let tmpYear = 1;
+                let tmpObj = {};
+                let tmpArr = [];
+
+                // 計算第一年
+                for (let i = 1; i <= 10; i++) {
+                    if (sum == 0) {
+                        sum = originMoney.toFixed(2);
+                    }
+                    console.log(`第${i}年 => ${sum}`);
+                    tmpObj[i] = sum;
+
+                    // 按照增長率計算
+                    sum = (sum * rate).toFixed(2);
+                }
+
+                tmpObj['name'] = `第${tmpYear}年`;
+                tmpArr.push(tmpObj);
+
+                // 顯示計算結果
+                console.log('計算結果:', tmpArr);
+
+                // 顯示結果在頁面上
+                let resultText = "<h3>計算結果:</h3><table border='1'><tr><th>年分</th><th>金額</th></tr>";
+                for (let i = 1; i <= 10; i++) {
+                    resultText += `<tr><td>第${i}年</td><td>${tmpObj[i]}</td></tr>`;
+                }
+                resultText += "</table>";
+                document.body.insertAdjacentHTML('beforeend', resultText); // 顯示在頁面上
+            });
+        });
+    </script>
+
+</body>
+
+</html>
