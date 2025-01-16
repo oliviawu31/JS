@@ -14,8 +14,24 @@
 <body>
 
     <div class="container mt-3">
-        <h2>Bordered Table</h2>
-        <p>The .table-bordered class adds borders on all sides of the table and the cells:</p>
+        <h2>複利計算</h2>
+
+        <label for="originMoney">每年投入(萬)：</label>
+        <input type="number" name="" id="originMoney">
+
+        <label for="rate">年利率：</label>
+        <input type="number" name="" id="rate" value="1.08" step="0.01">
+
+        <button id="calculate">計算</button>
+        <br>
+        <br>
+
+
+
+
+
+
+
         <table class="table table-bordered" id="myTable">
             <thead>
                 <tr>
@@ -125,18 +141,8 @@
 
         }
 
-        // tmpObj[2] + tmpObj[1]
-
-        // [
-        //     {
-        //       1:10,  
-        //       2:10.8,  
-        //     }
-        // ]
 
         console.log('tmpArr', tmpArr);
-
-
 
 
 
