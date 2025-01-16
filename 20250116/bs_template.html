@@ -30,6 +30,10 @@
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
+
+        // -> . []  =>指前面的東西
+        // 箭頭函式 =>this 指向object
+
         let myArr = [1, 2, 3];
         console.log('myArr', myArr);
         console.log('myArr typeof', typeof (myArr));
@@ -42,10 +46,25 @@
             's3': 'cat',
             sayHello: function () {
                 console.log('hello');
-            }
+            },
+            call: function (data) {
+                console.log(`call data is ${data}`);
+            },
+            helloS1: function () {
+                console.log('this', this);
+                console.log('this.s1', this.s1);
+            },
+
+            helloS2: () => {
+                console.log('this', this);
+                console.log('this.s2', this.s2);
+            },
+
+
 
         }
         console.log('myObj array ?', Array.isArray(myObj));
+
 
         let name = 'oli';
         let s2Var = 's2';
@@ -55,8 +74,11 @@
         console.log('myObj點[s2Var]', myObj[s2Var]);
         console.log('name', name);
 
+        myObj.call('oli hello');
+        myObj.helloS1();
+        myObj.helloS2();
 
-        console.log(function () { return 'Hello'; }(), myObj);
+
 
     </script>
 </body>
