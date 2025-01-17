@@ -132,17 +132,53 @@
         const restartBtn = $('#restartBtn');
 
         let scoreVar = 0;
-        let scoreHighVar = 0;
+        let heighScoreVar = 0;
         let timerVar = 3;
+        let gameFlag = true;
+
+        score.text(scoreVar);
+        heighScore.text(heighScoreVar);
+        timer.text(timerVar);
+
+        ShootBtn.hide();
 
 
         //2.action
         startBtn.click(function (e) {
-            console.log('startBtn ok');
+            if (gameFlag == false) {
+                console.log('gameFlag false', gameFlag);
+                return false;
+            }
+            startBtn.hide();
+            ShootBtn.show();
 
-        })
+            console.log('startBtn ok');
+            // timer -1 / sec / 開始 start 停止 0
+            const myInterval = setInterval(myTimer, 1000);
+            let tmpTime = timerVar;
+            function myTimer() {
+                tmpTime = tmpTime - 1;
+                if (tmpTime < 0) {
+                    gameFlag = false;
+                    clearInterval(myInterval);
+                    startBtn.show();
+                    shootBtn.hide();
+                } else {
+                    timer.text(tmpTime);
+                }
+            }
+            function myStop() {
+                clearInterval(myInterval);
+            }
+
+        });
 
         ShootBtn.click(function (e) {
+            if (gameFlag == false) {
+                console.log('gameFlag flse', gameFlag);
+                return false;
+
+            }
             scoreVar += 2;
             score.text(scoreVar);
 
