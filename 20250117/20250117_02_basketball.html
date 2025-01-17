@@ -73,12 +73,12 @@
                             <div class="title">
                                 Time Remaining
                                 <br>
-                                <span>60</span>
+                                <span id="timer">60</span>
                             </div>
                             <div class="title">
                                 High Score
                                 <br>
-                                <span>999</span>
+                                <span id="heighScore">999</span>
                             </div>
                         </div>
                     </div>
@@ -89,7 +89,7 @@
                         <div class="col">
                             SCORE
                             <br>
-                            <span>
+                            <span id="score">
                                 180
                             </span>
                         </div>
@@ -97,16 +97,17 @@
                 </div>
             </div>
             <div class="container text-center ">
-                <img src="./imgs/03.gif" width="600px" class="rounded">
+                <img src="./imgs/03.gif" class="img-fluid rounded" alt="Basketball Animation" width="600px"
+                    class="rounded">
             </div>
         </div>
 
 
-        <div class="container text-center mt-3 mb-3">
+        <div class="container-fluid text-center mb-3">
             <div class="box2">
-                <button type="button" class="btn btn-warning btn-lg rounded-5">START</button>
-                <button type="button" class="btn btn-warning btn-lg ms-5 rounded-5">SHOOT</button>
-                <button type="button" class="btn btn-danger btn-lg rounded-5">RESTART</button>
+                <button type="button" id="startBtn" class="btn btn-warning btn-lg rounded-5">START</button>
+                <button type="button" id="ShootBtn" class="btn btn-warning btn-lg ms-5 rounded-5">SHOOT</button>
+                <button type="button" id="restartBtn" class="btn btn-danger btn-lg rounded-5">RESTART</button>
 
             </div>
         </div>
@@ -121,6 +122,31 @@
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
+
+        //1.bind
+        const timer = $('#timer');
+        const heighScore = $('#heighScore');
+        const score = $('#score');
+        const startBtn = $('#startBtn');
+        const ShootBtn = $('#ShootBtn');
+        const restartBtn = $('#restartBtn');
+
+
+        //2.action
+        startBtn.click(function (e) {
+            console.log('startBtn ok');
+
+        })
+
+        ShootBtn.click(function (e) {
+            console.log('ShootBtn ok');
+
+        })
+
+        restartBtn.click(function (e) {
+            console.log('restartBtn ok');
+
+        })
 
 
 
