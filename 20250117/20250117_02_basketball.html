@@ -106,7 +106,7 @@
         <div class="container-fluid text-center mb-3">
             <div class="box2">
                 <button type="button" id="startBtn" class="btn btn-warning btn-lg rounded-5">START</button>
-                <button type="button" id="ShootBtn" class="btn btn-warning btn-lg ms-5 rounded-5">SHOOT</button>
+                <button type="button" id="ShootBtn" class="btn btn-warning btn-lg  rounded-5">SHOOT</button>
                 <button type="button" id="restartBtn" class="btn btn-danger btn-lg rounded-5">RESTART</button>
 
             </div>
@@ -131,6 +131,10 @@
         const ShootBtn = $('#ShootBtn');
         const restartBtn = $('#restartBtn');
 
+        let scoreVar = 0;
+        let scoreHighVar = 0;
+        let timerVar = 3;
+
 
         //2.action
         startBtn.click(function (e) {
@@ -139,7 +143,8 @@
         })
 
         ShootBtn.click(function (e) {
-            console.log('ShootBtn ok');
+            scoreVar += 2;
+            score.text(scoreVar);
 
         })
 
