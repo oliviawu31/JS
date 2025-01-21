@@ -75,7 +75,7 @@
                                 <br>
                                 <span id="timer">60</span>
                             </div>
-                            <div class="title">
+                            <div class="title" id="clearHighScore">
                                 High Score
                                 <br>
                                 <span id="highScore">999</span>
@@ -133,6 +133,7 @@
             const startBtn = $('#startBtn');
             const shootBtn = $('#shootBtn');
             const restartBtn = $('#restartBtn');
+            const clearHighScore = $('#clearHighScore');
 
             let scoreVar = 0;
 
@@ -230,7 +231,15 @@
                 // 分數0
                 scoreVar = 0;
                 score.text(scoreVar);
+            });
 
+            // 最高分數清除
+            clearHighScore.click(function (e) {
+                localStorage.setItem('highScore', 0);
+                highScoreVar = 0;
+                highScoreVar = localStorage.getItem('highScore');
+                console.log('highScoreVar', highScoreVar);
+                highScore.text(highScoreVar);
 
             });
 
