@@ -78,7 +78,7 @@
                             <div class="title">
                                 High Score
                                 <br>
-                                <span id="heighScore">999</span>
+                                <span id="highScore">999</span>
                             </div>
                         </div>
                     </div>
@@ -122,108 +122,119 @@
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-
-        //1.bind
-        const timer = $('#timer');
-        const heighScore = $('#heighScore');
-        const score = $('#score');
-        const startBtn = $('#startBtn');
-        const shootBtn = $('#shootBtn');
-        const restartBtn = $('#restartBtn');
-
-        let scoreVar = 0;
-        let heighScoreVar = 0;
-        let timerVar = 5;
-        let gameFlag = true;
-        let tmpTime = 0;
-
-        score.text(scoreVar);
-        heighScore.text(heighScoreVar);
-        timer.text(timerVar);
-
-        shootBtn.hide();
+        $(document).ready(function () {
 
 
-        //2.action
-        startBtn.click(function (e) {
-            if (gameFlag == false) {
-                console.log('gameFlag false', gameFlag);
-                return false;
-            }
-            startBtn.hide();
-            shootBtn.show();
 
-            console.log('startBtn ok');
-            // timer -1 / sec / 開始 start 停止 0
-            const myInterval = setInterval(myTimer, 1000);
-            tmpTime = timerVar;
-            function myTimer() {
-                tmpTime = tmpTime - 1;
-                if (tmpTime < 0) {
-                    gameFlag = false;
-                    clearInterval(myInterval);
-                    startBtn.show();
-                    shootBtn.hide();
-                } else {
-                    timer.text(tmpTime);
-                }
-            }
-            function myStop() {
-                clearInterval(myInterval);
-            }
+            //1.bind
+            const timer = $('#timer');
+            const highScore = $('#highScore');
+            const score = $('#score');
+            const startBtn = $('#startBtn');
+            const shootBtn = $('#shootBtn');
+            const restartBtn = $('#restartBtn');
 
-        });
+            let scoreVar = 0;
 
-        shootBtn.click(function (e) {
-            if (gameFlag == false) {
-                console.log('gameFlag flse', gameFlag);
-                return false;
+            // 預設0 有最高分就取最高分
+            // localStorage.setItem('highScore', 0);
+            // let highScoreVar = 0;
+            let highScoreVar = localStorage.getItem('highScore');
+            console.log('highScoreVar', highScoreVar);
 
-            }
-            // 兩分球 31-60
-            // 三分球 0-30
-            console.log('tmpTime', tmpTime);
-            if (tmpTime <= 3) {
-                scoreVar += 3;
-            } else {
-                scoreVar += 2;
-            }
+
+            let timerVar = 5;
+            let gameFlag = true;
+            let tmpTime = 0;
 
             score.text(scoreVar);
-        })
-
-        restartBtn.click(function (e) {
-            console.log('restartBtn ok');
-            // 倒數計時 60
-            // 分數0
-
-
-            // 倒數計時 60
-            // 分數0
-
-            timerVar = 5;
-            tmpTime = 0;
-            scoreVar = 0;
-            score.text(scoreVar);
+            highScore.text(highScoreVar);
             timer.text(timerVar);
-            console.log('timerVar', timerVar);
-            console.log('tmpTime', tmpTime);
 
-            // gameFlag false false
-            // 重新啟動遊戲
-            gameFlag = true;
-            console.log("gameFlag", gameFlag);
-            startBtn.show();
             shootBtn.hide();
 
 
-            // if (heighScoreVar >= scoreVar)
-            //     text.scoreVar(heighScore);
-            // myStop();
+            //2.action
+            startBtn.click(function (e) {
+                if (gameFlag == false) {
+                    console.log('gameFlag false', gameFlag);
+                    return false;
+                }
+                startBtn.hide();
+                shootBtn.show();
+                console.log('startBtn ok');
 
-        })
+                // timer -1 / sec / 開始 start 停止 0
+                const myInterval = setInterval(myTimer, 1000);
+                tmpTime = timerVar;
+                function myTimer() {
+                    tmpTime = tmpTime - 1;
+                    if (tmpTime < 0) {
+                        gameFlag = false;
+                        clearInterval(myInterval);
+                        startBtn.show();
+                        shootBtn.hide();
+                    } else {
+                        timer.text(tmpTime);
+                    }
+                }
+                function myStop() {
+                    clearInterval(myInterval);
+                }
+
+            });
+
+            shootBtn.click(function (e) {
+                if (gameFlag == false) {
+                    console.log('gameFlag flse', gameFlag);
+                    return false;
+
+                }
+                // 兩分球 31-60
+                // 三分球 0-30
+                // feature
+                console.log('tmpTime', tmpTime);
+                if (tmpTime <= 3) {
+                    scoreVar += 3;
+                } else {
+                    scoreVar += 2;
+                }
+
+                // 最高分數 < 目前分數
+                if (highScoreVar < scoreVar) {
+                    localStorage.setItem('highScore', scoreVar)
+                    highScore.text(scoreVar);
+                }
+                score.text(scoreVar);
+            })
+
+            restartBtn.click(function (e) {
+                console.log('restartBtn ok');
+                // 倒數計時 10
+                // 分數0
 
 
+                // 倒數計時 10
+                tmpTime = 0;
+                timer.text(timerVar);
+                console.log('timerVar', timerVar);
+                console.log('tmpTime', tmpTime);
+
+                // gameFlag false false
+                // 重新啟動遊戲
+                gameFlag = true;
+                console.log("gameFlag", gameFlag);
+                startBtn.show();
+                shootBtn.hide();
+
+                // 分數0
+                scoreVar = 0;
+                score.text(scoreVar);
+
+
+            });
+
+        });
 
 
     </script>
