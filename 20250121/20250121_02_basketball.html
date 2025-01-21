@@ -10,17 +10,22 @@
         integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
+        body {
+            background-color: #1f1f1f;
+            font-family: 'Poppins', sans-serif;
+        }
+
         .box {
             width: 60%;
             height: 100%;
-            background: rgb(124, 32, 32);
+            background: #2b2b2b;
+            border-radius: 30px;
             margin: auto;
         }
 
         .box1 {
             width: 50%;
             height: 700px;
-            /* background: lightpink; */
             margin: auto;
             color: beige;
         }
@@ -28,7 +33,6 @@
         .box2 {
             width: 50%;
             height: 100px;
-            /* background: beige; */
             margin: auto;
             display: flex;
             justify-content: space-around;
@@ -46,39 +50,31 @@
 
         .title {
             font-size: 20px;
+            color: #FF6F00;
         }
 
-        /* 用於顯示籃球動畫 */
-        .basketball {
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: none;
-            z-index: 1000;
+        #clearHighScore {
+            color: red;
+            font-size: 20px;
         }
 
-        /* 動畫效果：籃球向中間投出 */
-        @keyframes shootAnimation {
-            0% {
-                top: 70%;
-                opacity: 1;
-            }
-
-            50% {
-                top: 45%;
-                opacity: 1;
-            }
-
-            100% {
-                top: 20%;
-                opacity: 0;
-            }
+        #startBtn,
+        #shootBtn {
+            background-color: #FF6F00;
+            border: none;
+            color: white;
         }
 
-        .shooting {
-            animation: shootAnimation 1s forwards;
+        #shootBtn {
+            background-color: #FF6F00;
+            border: none;
+            color: white;
+        }
+
+        #restartBtn {
+            background-color: #E53935;
+            border: none;
+            color: white;
         }
     </style>
 </head>
@@ -86,6 +82,7 @@
 <body>
 
     <!-- 投籃機外框 -->
+
     <div class="container text-center mt-3">
         <h3>Let's Play!</h3>
         <hr>
@@ -103,10 +100,10 @@
                                 <br>
                                 <span id="timer">60</span>
                             </div>
-                            <div class="title">
+                            <div class="title" id="clearHighScore">
                                 High Score
                                 <br>
-                                <span id="heighScore">999</span>
+                                <span id="highScore">999</span>
                             </div>
                         </div>
                     </div>
@@ -124,23 +121,20 @@
                     </div>
                 </div>
             </div>
-            <div class="container text-center">
-                <img src="./imgs/03.gif" class="img-fluid rounded" alt="Basketball Animation" width="600px"
-                    class="rounded">
+            <div class="container text-center ">
+                <img id="basketball" src="./imgs/03.gif" class="img-fluid rounded" alt="Basketball Animation"
+                    width="600px" class="rounded">
             </div>
         </div>
 
         <div class="container-fluid text-center mb-3">
             <div class="box2">
                 <button type="button" id="startBtn" class="btn btn-warning btn-lg rounded-5">START</button>
-                <button type="button" id="shootBtn" class="btn btn-warning btn-lg rounded-5">SHOOT</button>
+                <button type="button" id="shootBtn" class="btn btn-warning btn-lg  rounded-5">SHOOT</button>
                 <button type="button" id="restartBtn" class="btn btn-danger btn-lg rounded-5">RESTART</button>
             </div>
         </div>
     </div>
-
-    <!-- 用於顯示籃球動畫的元素 -->
-    <img src="./imgs/01-basketball.gif" id="basketball" class="basketball" alt="Basketball">
 
     <!-- js include 順序 1.bs 2.jq 3.self -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
@@ -150,98 +144,114 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <script>
+        $(document).ready(function () {
+            //1.bind
+            const timer = $('#timer');
+            const highScore = $('#highScore');
+            const score = $('#score');
+            const startBtn = $('#startBtn');
+            const shootBtn = $('#shootBtn');
+            const restartBtn = $('#restartBtn');
+            const clearHighScore = $('#clearHighScore');
 
-        //1.bind
-        const timer = $('#timer');
-        const heighScore = $('#heighScore');
-        const score = $('#score');
-        const startBtn = $('#startBtn');
-        const shootBtn = $('#shootBtn');
-        const restartBtn = $('#restartBtn');
-        const basketball = $('#basketball');  // 籃球動畫元素
+            let scoreVar = 0;
 
-        let scoreVar = 0;
-        let heighScoreVar = 0;
-        let timerVar = 10;
-        let gameFlag = true;
-        let tmpTime = 0;
+            // 預設0 有最高分就取最高分
+            let highScoreVar = localStorage.getItem('highScore') || 0;
+            console.log('highScoreVar', highScoreVar);
 
-        score.text(scoreVar);
-        heighScore.text(heighScoreVar);
-        timer.text(timerVar);
+            let timerVar = 5;
+            let gameFlag = true;
+            let tmpTime = 0;
 
-        shootBtn.hide();
+            score.text(scoreVar);
+            highScore.text(highScoreVar);
+            timer.text(timerVar);
 
+            shootBtn.hide();
 
-        //2.action
-        startBtn.click(function (e) {
-            if (gameFlag == false) {
-                console.log('gameFlag false', gameFlag);
-                return false;
-            }
-            startBtn.hide();
-            shootBtn.show();
-
-            console.log('startBtn ok');
-            // timer -1 / sec / 開始 start 停止 0
-            const myInterval = setInterval(myTimer, 1000);
-            tmpTime = timerVar;
-            function myTimer() {
-                tmpTime = tmpTime - 1;
-                if (tmpTime < 0) {
-                    gameFlag = false;
-                    clearInterval(myInterval);
-                    startBtn.show();
-                    shootBtn.hide();
-                } else {
-                    timer.text(tmpTime);
+            //2.action
+            startBtn.click(function (e) {
+                if (gameFlag == false) {
+                    console.log('gameFlag false', gameFlag);
+                    return false;
                 }
-            }
+                startBtn.hide();
+                shootBtn.show();
+                console.log('startBtn ok');
 
-        });
+                // timer -1 / sec / 開始 start 停止 0
+                const myInterval = setInterval(myTimer, 1000);
+                tmpTime = timerVar;
 
-        shootBtn.click(function (e) {
-            if (gameFlag == false) {
-                console.log('gameFlag false', gameFlag);
-                return false;
-            }
+                function myTimer() {
+                    tmpTime = tmpTime - 1;
+                    if (tmpTime < 0) {
+                        gameFlag = false;
+                        clearInterval(myInterval);
+                        startBtn.show();
+                        shootBtn.hide();
 
-            // 顯示籃球並觸發動畫
-            basketball.show();
-            basketball.addClass('shooting'); // 開始籃球動畫
-
-            // 動畫結束後隱藏籃球
-            basketball.on('animationend', function () {
-                basketball.hide();
-                basketball.removeClass('shooting');
+                        // 遊戲結束後，檢查並更新高分
+                        if (scoreVar > highScoreVar) {
+                            highScoreVar = scoreVar;
+                            localStorage.setItem('highScore', highScoreVar); //更新 localStorage
+                            highScore.text(highScoreVar); // 更新畫面上的高分
+                        }
+                    } else {
+                        timer.text(tmpTime);
+                    }
+                }
             });
 
-            // 兩分球 31-60
-            // 三分球 0-30
-            console.log('tmpTime', tmpTime);
-            if (tmpTime <= 5) {
-                scoreVar += 3;
-            } else {
-                scoreVar += 2;
-            }
+            shootBtn.click(function (e) {
+                if (gameFlag == false) {
+                    console.log('gameFlag false', gameFlag);
+                    return false;
+                }
 
-            score.text(scoreVar);
-        })
 
-        restartBtn.click(function (e) {
-            console.log('restartBtn ok');
-            timerVar = 10;
-            tmpTime = 0;
-            scoreVar = 0;
-            timer.text(timerVar);
-            score.text(scoreVar);
+                // 兩分球 31-60
+                // 三分球 0-30
+                if (tmpTime <= 3) {
+                    scoreVar += 3;
+                } else {
+                    scoreVar += 2;
+                }
 
-            gameFlag = true;
-            startBtn.show();
-            shootBtn.hide();
-        })
+                // 更新分數
+                score.text(scoreVar);
+            });
 
+            restartBtn.click(function (e) {
+                console.log('restartBtn ok');
+                tmpTime = 0;
+                timer.text(timerVar);
+                console.log('timerVar', timerVar);
+                console.log('tmpTime', tmpTime);
+
+                // 重新啟動遊戲
+                gameFlag = true;
+                console.log("gameFlag", gameFlag);
+                startBtn.show();
+                shootBtn.hide();
+
+                // 分數0
+                scoreVar = 0;
+                score.text(scoreVar);
+            });
+
+            // 最高分數清除
+            clearHighScore.click(function (e) {
+                localStorage.setItem('highScore', 0);
+                highScoreVar = 0;
+                highScoreVar = localStorage.getItem('highScore');
+                console.log('highScoreVar', highScoreVar);
+                highScore.text(highScoreVar);
+            });
+        });
     </script>
 </body>
 
