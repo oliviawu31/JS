@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Basketball Game</title>
     <!-- link css 順序 1.bs 2.self -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
         integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
@@ -23,7 +23,6 @@
             /* background: lightpink; */
             margin: auto;
             color: beige;
-
         }
 
         .box2 {
@@ -48,18 +47,47 @@
         .title {
             font-size: 20px;
         }
+
+        /* 用於顯示籃球動畫 */
+        .basketball {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: none;
+            z-index: 1000;
+        }
+
+        /* 動畫效果：籃球向中間投出 */
+        @keyframes shootAnimation {
+            0% {
+                top: 70%;
+                opacity: 1;
+            }
+
+            50% {
+                top: 45%;
+                opacity: 1;
+            }
+
+            100% {
+                top: 20%;
+                opacity: 0;
+            }
+        }
+
+        .shooting {
+            animation: shootAnimation 1s forwards;
+        }
     </style>
 </head>
 
 <body>
 
-
     <!-- 投籃機外框 -->
-
     <div class="container text-center mt-3">
-        <h3>Let's Play!
-
-        </h3>
+        <h3>Let's Play!</h3>
         <hr>
     </div>
 
@@ -96,22 +124,23 @@
                     </div>
                 </div>
             </div>
-            <div class="container text-center ">
+            <div class="container text-center">
                 <img src="./imgs/03.gif" class="img-fluid rounded" alt="Basketball Animation" width="600px"
                     class="rounded">
             </div>
         </div>
 
-
         <div class="container-fluid text-center mb-3">
             <div class="box2">
                 <button type="button" id="startBtn" class="btn btn-warning btn-lg rounded-5">START</button>
-                <button type="button" id="ShootBtn" class="btn btn-warning btn-lg  rounded-5">SHOOT</button>
+                <button type="button" id="shootBtn" class="btn btn-warning btn-lg rounded-5">SHOOT</button>
                 <button type="button" id="restartBtn" class="btn btn-danger btn-lg rounded-5">RESTART</button>
-
             </div>
         </div>
     </div>
+
+    <!-- 用於顯示籃球動畫的元素 -->
+    <img src="./imgs/01-basketball.gif" id="basketball" class="basketball" alt="Basketball">
 
     <!-- js include 順序 1.bs 2.jq 3.self -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
@@ -128,8 +157,9 @@
         const heighScore = $('#heighScore');
         const score = $('#score');
         const startBtn = $('#startBtn');
-        const ShootBtn = $('#ShootBtn');
+        const shootBtn = $('#shootBtn');
         const restartBtn = $('#restartBtn');
+        const basketball = $('#basketball');  // 籃球動畫元素
 
         let scoreVar = 0;
         let heighScoreVar = 0;
@@ -141,7 +171,7 @@
         heighScore.text(heighScoreVar);
         timer.text(timerVar);
 
-        ShootBtn.hide();
+        shootBtn.hide();
 
 
         //2.action
@@ -151,7 +181,7 @@
                 return false;
             }
             startBtn.hide();
-            ShootBtn.show();
+            shootBtn.show();
 
             console.log('startBtn ok');
             // timer -1 / sec / 開始 start 停止 0
@@ -168,21 +198,27 @@
                     timer.text(tmpTime);
                 }
             }
-            function myStop() {
-                clearInterval(myInterval);
-            }
 
         });
 
-        ShootBtn.click(function (e) {
+        shootBtn.click(function (e) {
             if (gameFlag == false) {
-                console.log('gameFlag flse', gameFlag);
+                console.log('gameFlag false', gameFlag);
                 return false;
-
             }
+
+            // 顯示籃球並觸發動畫
+            basketball.show();
+            basketball.addClass('shooting'); // 開始籃球動畫
+
+            // 動畫結束後隱藏籃球
+            basketball.on('animationend', function () {
+                basketball.hide();
+                basketball.removeClass('shooting');
+            });
+
             // 兩分球 31-60
             // 三分球 0-30
-
             console.log('tmpTime', tmpTime);
             if (tmpTime <= 5) {
                 scoreVar += 3;
@@ -191,16 +227,20 @@
             }
 
             score.text(scoreVar);
-
         })
 
         restartBtn.click(function (e) {
             console.log('restartBtn ok');
+            timerVar = 10;
+            tmpTime = 0;
+            scoreVar = 0;
+            timer.text(timerVar);
+            score.text(scoreVar);
 
+            gameFlag = true;
+            startBtn.show();
+            shootBtn.hide();
         })
-
-
-
 
     </script>
 </body>

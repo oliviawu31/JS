@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basketball Game</title>
+    <!-- link css 順序 1.bs 2.self -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+        integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .box {
+            width: 60%;
+            height: 100%;
+            background: rgb(124, 32, 32);
+            margin: auto;
+        }
+
+        .box1 {
+            width: 50%;
+            height: 700px;
+            /* background: lightpink; */
+            margin: auto;
+            color: beige;
+
+        }
+
+        .box2 {
+            width: 50%;
+            height: 100px;
+            /* background: beige; */
+            margin: auto;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .container-box {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        span {
+            font-size: 30px;
+        }
+
+        .title {
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <!-- 投籃機外框 -->
+
+    <div class="container text-center mt-3">
+        <h3>Let's Play!
+
+        </h3>
+        <hr>
+    </div>
+
+    <div class="box">
+
+        <div class="box1">
+            <div class="container text-center mt-3">
+                <div class="row">
+                    <div class="col">
+                        <div class="container-box mt-2">
+                            <div class="title">
+                                Time Remaining
+                                <br>
+                                <span id="timer">60</span>
+                            </div>
+                            <div class="title">
+                                High Score
+                                <br>
+                                <span id="heighScore">999</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 分數 -->
+                <div class="container mt-5 mb-3 title">
+                    <div class="row">
+                        <div class="col">
+                            SCORE
+                            <br>
+                            <span id="score">
+                                180
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container text-center ">
+                <img src="./imgs/03.gif" class="img-fluid rounded" alt="Basketball Animation" width="600px"
+                    class="rounded">
+            </div>
+        </div>
+
+
+        <div class="container-fluid text-center mb-3">
+            <div class="box2">
+                <button type="button" id="startBtn" class="btn btn-warning btn-lg rounded-5">START</button>
+                <button type="button" id="shootBtn" class="btn btn-warning btn-lg  rounded-5">SHOOT</button>
+                <button type="button" id="restartBtn" class="btn btn-danger btn-lg rounded-5">RESTART</button>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- js include 順序 1.bs 2.jq 3.self -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
+        integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+
+        //1.bind
+        const timer = $('#timer');
+        const heighScore = $('#heighScore');
+        const score = $('#score');
+        const startBtn = $('#startBtn');
+        const shootBtn = $('#shootBtn');
+        const restartBtn = $('#restartBtn');
+
+        let scoreVar = 0;
+        let heighScoreVar = 0;
+        let timerVar = 5;
+        let gameFlag = true;
+        let tmpTime = 0;
+
+        score.text(scoreVar);
+        heighScore.text(heighScoreVar);
+        timer.text(timerVar);
+
+        shootBtn.hide();
+
+
+        //2.action
+        startBtn.click(function (e) {
+            if (gameFlag == false) {
+                console.log('gameFlag false', gameFlag);
+                return false;
+            }
+            startBtn.hide();
+            shootBtn.show();
+
+            console.log('startBtn ok');
+            // timer -1 / sec / 開始 start 停止 0
+            const myInterval = setInterval(myTimer, 1000);
+            tmpTime = timerVar;
+            function myTimer() {
+                tmpTime = tmpTime - 1;
+                if (tmpTime < 0) {
+                    gameFlag = false;
+                    clearInterval(myInterval);
+                    startBtn.show();
+                    shootBtn.hide();
+                } else {
+                    timer.text(tmpTime);
+                }
+            }
+            function myStop() {
+                clearInterval(myInterval);
+            }
+
+        });
+
+        shootBtn.click(function (e) {
+            if (gameFlag == false) {
+                console.log('gameFlag flse', gameFlag);
+                return false;
+
+            }
+            // 兩分球 31-60
+            // 三分球 0-30
+            console.log('tmpTime', tmpTime);
+            if (tmpTime <= 3) {
+                scoreVar += 3;
+            } else {
+                scoreVar += 2;
+            }
+
+            score.text(scoreVar);
+        })
+
+        restartBtn.click(function (e) {
+            console.log('restartBtn ok');
+            // 倒數計時 60
+            // 分數0
+
+
+            // 倒數計時 60
+            // 分數0
+
+            timerVar = 5;
+            tmpTime = 0;
+            scoreVar = 0;
+            score.text(scoreVar);
+            timer.text(timerVar);
+            console.log('timerVar', timerVar);
+            console.log('tmpTime', tmpTime);
+
+            // gameFlag false false
+            // 重新啟動遊戲
+            gameFlag = true;
+            console.log("gameFlag", gameFlag);
+            startBtn.show();
+            shootBtn.hide();
+
+
+            // if (heighScoreVar >= scoreVar)
+            //     text.scoreVar(heighScore);
+            // myStop();
+
+        })
+
+
+
+
+    </script>
+</body>
+
+</html>
