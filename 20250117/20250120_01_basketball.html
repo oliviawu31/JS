@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>投籃機遊戲</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #87ceeb;
+        }
+
+        canvas {
+            border: 2px solid #000;
+            background-color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    <script>
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+
+        // 設置遊戲參數
+        const basketSize = 100;  // 籃框的尺寸 (正方形)
+        const basketY = 100;     // 籃框的Y座標
+        const ballMaxRadius = 30; // 初始最大籃球半徑
+        let ballRadius = ballMaxRadius;   // 初始籃球半徑設置為最大
+        let ballX = canvas.width / 2;
+        let ballY = canvas.height - ballRadius - 10; // 起始位置在畫面底部
+        let ballSpeedX = 0;
+        let ballSpeedY = 0;
+        let isBallInAir = false;
+        let score = 0;
+        let ballLifeTime = 0; // 用來控制籃球的大小變化
+        let ballDistance = 0; // 用來記錄籃球飛行的距離
+
+        // 籃框的X座標
+        const basketX = (canvas.width - basketSize) / 2;
+
+        // 監聽鍵盤事件來控制籃框移動
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "ArrowLeft") {
+                if (basketX > 0) {
+                    basketX -= 20;
+                }
+            } else if (e.key === "ArrowRight") {
+                if (basketX < canvas.width - basketSize) {
+                    basketX += 20;
+                }
+            }
+        });
+
+        // 投籃
+        document.addEventListener("click", () => {
+            if (!isBallInAir) {
+                // 設置拋物線的目標位置
+                const targetX = basketX + basketSize / 2; // 籃框中心X座標
+                const targetY = basketY - ballRadius;     // 籃框的上緣作為目標
+
+                // 計算投射的角度和速度
+                const angle = Math.atan2(targetY - ballY, targetX - ballX); // 計算角度
+                const speed = 18; // 投籃速度
+
+                // 計算水平和垂直速度分量
+                ballSpeedX = speed * Math.cos(angle); // 水平速度
+                ballSpeedY = speed * Math.sin(angle); // 垂直速度
+
+                // 初始設定籃球的大小，並開始投籃
+                ballRadius = ballMaxRadius;
+                ballLifeTime = 0; // 重置球的生命周期
+                ballDistance = 0; // 重置球的飛行距離
+                isBallInAir = true;
+            }
+        });
+
+        // 繪製遊戲元素
+        function drawGame() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // 清除畫布
+
+            // 繪製籃框 (正方形)
+            ctx.fillStyle = "#ff5733";
+            ctx.fillRect(basketX, basketY, basketSize, basketSize);
+
+            // 繪製籃球
+            ctx.fillStyle = "#ffcc00";
+            ctx.beginPath();
+            ctx.arc(ballX, ballY, ballRadius, 0, Math.PI * 2);
+            ctx.fill();
+
+            // 繪製分數
+            ctx.fillStyle = "#000";
+            ctx.font = "30px Arial";
+            ctx.fillText("分數: " + score, 20, 40);
+
+            // 更新籃球位置
+            if (isBallInAir) {
+                ballX += ballSpeedX;
+                ballY += ballSpeedY;
+                ballSpeedY += 0.5; // 重力加速度
+
+                // 控制球的大小隨時間變小
+                ballDistance += Math.abs(ballSpeedX); // 累加水平方向的距離
+                ballLifeTime += 0.1; // 增加時間
+                ballRadius = ballMaxRadius - (ballDistance / 20); // 隨著距離逐漸減小
+
+                // 如果球的大小變到最小值，停止變小
+                if (ballRadius <= 5) {
+                    ballRadius = 5; // 最小半徑設置為 5
+                }
+
+                // 檢查球是否掉落到籃框內
+                if (ballY + ballRadius >= basketY && ballY - ballRadius <= basketY + basketSize && ballX >= basketX && ballX <= basketX + basketSize) {
+                    score++;
+                    resetBall();
+                }
+
+                // 檢查球是否落地
+                if (ballY - ballRadius > canvas.height) {
+                    resetBall();
+                }
+            }
+
+            requestAnimationFrame(drawGame); // 更新畫面
+        }
+
+        // 重置籃球
+        function resetBall() {
+            ballX = canvas.width / 2;
+            ballY = canvas.height - ballRadius - 10;
+            ballSpeedX = 0;
+            ballSpeedY = 0;
+            ballRadius = ballMaxRadius; // 重設球的大小為最大值
+            ballLifeTime = 0;
+            ballDistance = 0;
+            isBallInAir = false;
+        }
+
+        drawGame();
+    </script>
+</body>
+
+</html>
