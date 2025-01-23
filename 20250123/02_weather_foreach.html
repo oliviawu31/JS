@@ -16,10 +16,24 @@
 
 <body>
 
-
-
-
-
+    <div class="container mt-3">
+        <h2>Basic Table</h2>
+        <p>The .table class adds basic styling (light padding and horizontal dividers) to a table:</p>
+        <table class="table" id="myTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>locationName</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- <tr>
+                    <td>1</td>
+                    <td>台北市</td>
+                </tr> -->
+            </tbody>
+        </table>
+    </div>
 
     <!-- js include 順序 1.bs 2.jq 3.self -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
@@ -35,6 +49,14 @@
             let pwd = pw;
             console.log('pwd', pwd);
 
+            // 1. bind
+            const myTable = $('#myTable');
+            const myTbody = myTable.find('tbody');
+            console.log('myTbody', myTbody);
+
+
+            // 2. action
+
             let url = `https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=${pwd}`;
             $.ajax({
                 type: "get",
@@ -48,10 +70,22 @@
                     console.log('data', data);
 
                     $.each(data, function (key, value) {
-                        console.log('key', key);
-                        console.log('value', value.locationName);
+                        // console.log('key', key);
+                        // console.log('value', value.locationName)
 
 
+                        let tmpLocationName = value.locationName;
+                        let tmpLocationID = key;
+                        // 1.地名
+                        console.log('tmpLocationName', tmpLocationName);
+                        // 2.table
+                        let tmpText = `
+                            <tr>
+                                <td>${tmpLocationID + 1}</td>
+                                <td>${tmpLocationName}</td>
+                            </tr>
+                        `;
+                        $(myTbody).append(tmpText);
                     });
 
 
