@@ -47,6 +47,14 @@
                     data = res.records.location;
                     console.log('data', data);
 
+                    $.each(data, function (key, value) {
+                        console.log('key', key);
+                        console.log('value', value.locationName);
+
+
+                    });
+
+
                 }
 
             });
