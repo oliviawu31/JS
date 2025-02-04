@@ -49,7 +49,7 @@
 
 
         $(document).ready(function () {
-            let url = `../20250123/data/data.json`;
+            let url = `https://tcgbusfs.blob.core.windows.net/dotapp/news.json`;
 
             // 1. bind
             const myTable = $('#myTable');
@@ -63,36 +63,31 @@
                 dataType: "json",
                 success: function (res) {
                     console.log('res', res);
-                    let data = res[0].location;
+
+                    let data = res.News[3].chtmessage;
                     console.log('data', data);
-
-                    $.each(data, function (key, value) {
-                        console.log('key', key);
-                        console.log('value', value.locationName)
+                    $.each(res.News, function (key, value) {
+                        console.log('name', value.chtmessage);
 
 
-                        // let tmpLocationName = value.locationName;
-                        // let tmpLocationID = key;
-                        // // 1.地名
-                        // console.log('tmpLocationName', tmpLocationName);
-                        // // 2.table
-                        // let tmpText = `
-                        //     <tr>
-                        //         <td>${tmpLocationID + 1}</td>
-                        //         <td>${tmpLocationName}</td>
-                        //     </tr>
-                        // `;
-                        // $(myTbody).append(tmpText);
+                        let tmpchtmessage = value.chtmessage;
+                        let tmpID = key;
+                        // 1.地名
+                        console.log('tmpchtmessage', tmpchtmessage);
+                        // 2.table
+                        let tmpText = `
+                    <tr>
+                        <td>${tmpID + 1}</td>
+                        <td>${tmpchtmessage}</td>
+                        </tr>
+                        `;
+                        $(myTbody).append(tmpText);
+
                     });
 
                 }
 
-
-
-
-
             });
-
 
 
         });

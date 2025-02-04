@@ -47,19 +47,43 @@
     <!-- <img src="./php/data.php" alt="" srcset=""> -->
     <script>
         $(document).ready(function () {
-            // cors warning
-            // let url = `http://localhost/php/s20250123/php/data.php`;
-
-            //  public
-            let url = `http://localhost/data_public.php`;
+            let url = `http://localhost/curl.php`;
             $.ajax({
                 type: "get",
                 url: url,
                 // data: "data",
-                dataType: "Json",
+                dataType: "json",
                 success: function (res) {
-                    console.log('ajax ok');
                     console.log('res', res);
+                    let data = res.News[2].chtmessage;
+                    let J = Json.parse(res);
+                    console.log('J', J);
+
+                    data = res.News.chtmessage;
+                    console.log('data', data);
+
+
+                    $.each(data, function (key, value) {
+                        console.log('key', key);
+                        console.log('value', value.locationName)
+
+
+                        // let tmpLocationName = value.locationName;
+                        // let tmpLocationID = key;
+                        // 1.地名
+                        // console.log('tmpLocationName', tmpLocationName);
+                        // 2.table
+                        // let tmpText = `
+                        //     <tr>
+                        //         <td>${tmpLocationID + 1}</td>
+                        //         <td>${tmpLocationName}</td>
+                        //     </tr>
+                        // `;
+                        // $(myTbody).append(tmpText);
+                    });
+
+
+
 
 
                 }
