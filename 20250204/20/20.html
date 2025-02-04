@@ -10,13 +10,21 @@
         integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
+        #myTable tbody td:hover {
+            background-color: #f0ad4e;
+            /* 改成你想要的顏色 */
+        }
 
+        #myTable tbody td.selected {
+            background-color: #d9534f;
+            /* 點擊後的背景顏色 */
+        }
     </style>
 </head>
 
 <body>
 
-    <div class="container mt-3">
+    <div class="container mt-3 me-5">
         <h2>新營文化中心演藝廳節目表</h2>
         <p>新營文化中心展演藝廳檔期</p>
         <table class="table" id="myTable">
@@ -55,6 +63,9 @@
         const myTbody = myTable.find('tbody');
         // console.log('myTbody', myTbody);
 
+        $('#myTable tbody').on('click', 'td', function () {
+            $(this).toggleClass('selected');
+        });
 
         // 2. action
 
