@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新營文化中心演藝廳</title>
+    <!-- link css 順序 1.bs 2.self -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+        integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.css" />
+    <style>
+        #myTable tbody td:hover {
+            background-color: #f0ad4e;
+            /* 改成你想要的顏色 */
+        }
+
+        #myTable tbody td.selected {
+            background-color: #d9534f;
+            /* 點擊後的背景顏色 */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container mt-3 me-5 ">
+        <h2>新營文化中心演藝廳節目表</h2>
+        <p>新營文化中心展演藝廳檔期</p>
+        <table class="table" id="myTable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th id="tmplocation">展覽館</th>
+                    <th id="tmpExhibitionName">展覽名稱</th>
+                    <th id="tmpDate">日期</th>
+                    <th id="tmpWeek">星期</th>
+                    <th id="tmpTime">時間</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- <tr>
+                    <td>1</td>
+                    <td>台北市</td>
+                </tr> -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- js include 順序 1.bs 2.jq 3.self -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
+        integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="../olivia/pw.js"></script>
+
+    <!-- dataTable -->
+    <script src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
+    <script>
+
+        // 1. bind
+        const myTable = $('#myTable');
+        const myTbody = myTable.find('tbody');
+        // console.log('myTbody', myTbody);
+
+        $('#myTable tbody').on('click', 'td', function () {
+            $(this).toggleClass('selected');
+        });
+
+        // 2. action
+
+        let url = `https://soa.tainan.gov.tw/Api/Service/Get/f25bf673-78cb-45df-8b3c-530fb20afa78`;
+
+        $.ajax({
+            type: "get",
+            url: url,
+            dataType: "json",
+            success: function (res) {
+                // console.log('res', res);
+
+                let data = res.data;
+                // console.log('data', data);
+
+                // 處理每一筆資料
+                $.each(data, function (key, value) {
+                    let tmplocation = value.地點; //展覽館
+                    let tmpExhibitionName = value.名稱;  // 展覽名稱
+                    let tmpDate = value.日期;  // 開始日期
+                    let tmpWeek = value.星期;
+                    let tmpTime = value.時間;  // 結束日期
+
+                    let tmpText = `
+                        <tr>
+                            <td>${key + 1}</td>
+                            <td>${tmplocation}</td>
+                            <td>${tmpExhibitionName}</td>
+                            <td>${tmpDate}</td>
+                            <td>${tmpWeek}</td>
+                            <td>${tmpTime}</td>
+                        </tr>
+                    `;
+                    $(myTbody).append(tmpText);  // 把資料加到表格中
+                });
+                // 最後一步驟 end.dataTable
+                myTable.DataTable();
+            },
+
+        });
+
+
+    </script>
+</body>
+
+</html>
