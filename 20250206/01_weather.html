@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
         integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.css" />
+
     <style>
 
     </style>
@@ -19,7 +21,7 @@
     <div class="container mt-3">
         <h2>天氣api</h2>
         <p>36小時天氣資訊</p>
-        <table class="table" id="myTable">
+        <table class="table table-hover" id="myTable">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -47,7 +49,12 @@
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="./olivia/pw.js"></script>
+
+    <!-- dataTable -->
+    <script src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
+
     <script>
+
         $(document).ready(function () {
             let pwd = pw;
             console.log('pwd', pwd);
@@ -216,6 +223,9 @@
                         $(myTbody).append(tmpText);
                     });
 
+                    // 最後一步驟 end.dataTable
+                    myTable.DataTable();
+
 
                 }
 
@@ -224,6 +234,8 @@
         });
 
     </script>
+
+
 </body>
 
 </html>
