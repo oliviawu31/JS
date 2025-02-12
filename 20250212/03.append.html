@@ -59,6 +59,25 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
 
+        $(document).ready(function () {
+            // 1.bind
+            const appendBtn = $('#appendBtn');
+            const prependBtn = $('#prependBtn');
+            const afterBtn = $('#afterBtn');
+            const beforeBtn = $('#beforeBtn');
+            const box = $('.box');
+            let count = 0;
+
+            // 2.action
+            $(appendBtn).click(function (e) {
+                console.log('appendBtn', appendBtn);
+                count++;
+                let tmpText = `<p>第${count}次 origin Lorem, ipsum dolor.</p>`
+                box.append(tmpText);
+
+            });
+
+        })
 
 
 
