@@ -70,12 +70,35 @@
 
             // 2.action
             $(appendBtn).click(function (e) {
-                console.log('appendBtn', appendBtn);
+                // console.log('appendBtn', appendBtn);
                 count++;
                 let tmpText = `<p>第${count}次 origin Lorem, ipsum dolor.</p>`
                 box.append(tmpText);
-
             });
+
+            $(prependBtn).click(function (e) {
+                // console.log('appendBtn', appendBtn);
+                count++;
+                let tmpText = `<p>第${count}次 origin Lorem, ipsum dolor.</p>`
+                box.prepend(tmpText);
+            });
+
+
+            $(afterBtn).click(function (e) {
+                // console.log('appendBtn', appendBtn);
+                count++;
+                let tmpText = `<p>第${count}次 origin Lorem, ipsum dolor.</p>`
+                box.after(tmpText);
+            });
+
+
+            $(beforeBtn).click(function (e) {
+                // console.log('appendBtn', appendBtn);
+                count++;
+                let tmpText = `<p>第${count}次 origin Lorem, ipsum dolor.</p>`
+                box.before(tmpText);
+            });
+
 
         })
 
